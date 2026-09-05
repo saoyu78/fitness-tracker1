@@ -22,7 +22,7 @@ version = 1.0
 android.permissions = WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
 
 # 支持的Android架构
-android.archs = arm64-v8a, armeabi-v7a
+android.archs = arm64-v8a
 
 # Python依赖
 requirements = python3,kivy
