@@ -3,8 +3,6 @@ name: 构建健身记录 APK
 on:
   push:
     branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
   workflow_dispatch:
 
 jobs:
@@ -20,35 +18,11 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: 安装系统依赖与中文字体
+    - name: 安装系统依赖与字体
       run: |
         sudo apt-get update
-        sudo apt-get install -y \
-          build-essential \
-          git \
-          python3-dev \
-          ffmpeg \
-          libsdl2-dev \
-          libsdl2-image-dev \
-          libsdl2-mixer-dev \
-          libsdl2-ttf-dev \
-          libportmidi-dev \
-          libswscale-dev \
-          libavformat-dev \
-          libavcodec-dev \
-          zlib1g-dev \
-          libgstreamer1.0-dev \
-          gstreamer1.0-plugins-base \
-          gstreamer1.0-plugins-good \
-          openjdk-17-jdk \
-          wget \
-          unzip \
-          fonts-wqy-microhei
-
-        # 拷贝中文字体到项目根目录，防止安卓手机上文字变方块乱码
-        if [ ! -f "app_font.ttf" ]; then
-          cp /usr/share/fonts/truetype/wqy/wqy-microhei.ttc ./app_font.ttf
-        fi
+        sudo apt-get install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev fonts-wqy-microhei
+        cp /usr/share/fonts/truetype/wqy/wqy-microhei.ttc ./app_font.ttf || true
 
     - name: 安装 Buildozer 和 Cython
       run: |
@@ -65,12 +39,3 @@ jobs:
         name: fitness-tracker-apk
         path: bin/*.apk
         retention-days: 30
-
-    - name: 显示构建信息
-      run: |
-        echo "========================================="
-        echo "APK 构建完成！"
-        echo "========================================="
-        ls -lh bin/*.apk
-        echo ""
-        echo "请在 Actions 页面底部的 Artifacts 中下载 APK"
