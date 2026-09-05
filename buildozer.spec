@@ -25,7 +25,7 @@ android.permissions = WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
 android.archs = arm64-v8a
 
 # Python依赖
-requirements = python3,kivy
+requirements = python3==3.11.9,kivy
 
 # 应用图标（可选，需要自己准备图标文件）
 # icon.filename = %(source.dir)s/data/icon.png
